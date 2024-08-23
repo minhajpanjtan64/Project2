@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Interaction with Image Swap</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
+
+    <div class="grid grid-cols-3 gap-4 w-full max-w-6xl p-4">
+        <!-- Cards -->
+        <div class="card bg-white shadow-lg p-6 rounded-lg text-center cursor-pointer transition-transform duration-300" data-index="1">
+            <svg class="card-svg w-10 h-10 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+            <h2 class="card-heading text-xl font-bold mb-2">Card 1</h2>
+            <p class="text-gray-500">Click me to see the magic!</p>
+        </div>
+
+        <div class="card bg-white shadow-lg p-6 rounded-lg text-center cursor-pointer transition-transform duration-300" data-index="2">
+            <svg class="card-svg w-10 h-10 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+            <h2 class="card-heading text-xl font-bold mb-2">Card 2</h2>
+            <p class="text-gray-500">Click me to see the magic!</p>
+        </div>
+
+        <div class="card bg-white shadow-lg p-6 rounded-lg text-center cursor-pointer transition-transform duration-300" data-index="3">
+            <svg class="card-svg w-10 h-10 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+            <h2 class="card-heading text-xl font-bold mb-2">Card 3</h2>
+            <p class="text-gray-500">Click me to see the magic!</p>
+        </div>
+    </div>
+
+    <!-- Lower Div -->
+    <div class="lower-div w-full max-w-6xl p-4 mt-10">
+        <!-- Images -->
+        <img src="image1.png" class="lower-div-img w-full h-40 object-cover hidden" data-index="1">
+        <img src="image2.png" class="lower-div-img w-full h-40 object-cover hidden" data-index="2">
+        <img src="image3.png" class="lower-div-img w-full h-40 object-cover hidden" data-index="3">
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.card').on('click', function() {
+                // Reset all cards
+                $('.card').find('.card-heading').removeClass('text-blue-600');
+                $('.card').find('.card-svg').removeClass('text-blue-600');
+                // Set clicked card to blue
+                $(this).find('.card-heading').addClass('text-blue-600');
+                $(this).find('.card-svg').addClass('text-blue-600');
+
+                // Get the index of the clicked card
+                var index = $(this).data('index');
+                
+                // Show the corresponding image and hide others
+                $('.lower-div-img').each(function() {
+                    if ($(this).data('index') === index) {
+                        $(this).removeClass('hidden').addClass('block');
+                    } else {
+                        $(this).removeClass('block').addClass('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
